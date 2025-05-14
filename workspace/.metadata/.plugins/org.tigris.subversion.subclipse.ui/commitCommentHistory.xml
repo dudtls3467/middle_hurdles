@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CommitComments>	<CommitComment>오타 수정</CommitComment>
+	<CommitComment>페이 관련 오류 수정 </CommitComment>
+	<CommitComment>/site/orders vo,mybatis,xml,service,dao commit</CommitComment>
+	<CommitComment>결제관련</CommitComment>
+	<CommitComment>업데이트 확인중</CommitComment>
+</CommitComments>

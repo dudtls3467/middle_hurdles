@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;hurdles/src/main/java/kr/or/ddit/admin/member/dao/BlackDao.java.mine&apos;" deleteContents="false" description="Delete resource &apos;hurdles/src/main/java/kr/or/ddit/admin/member/dao/BlackDao.java.mine&apos;" element1="/hurdles/src/main/java/kr/or/ddit/admin/member/dao/BlackDao.java.mine" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1735528872313"/>
+</session>

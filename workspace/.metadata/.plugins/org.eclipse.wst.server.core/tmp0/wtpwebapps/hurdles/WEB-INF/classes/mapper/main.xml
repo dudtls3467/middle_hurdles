@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main">
+
+	<select id="payTotalPrice" resultType="int" parameterType="mainVo">
+		SELECT SUM(P.PAY_TOTAL_PRICE)
+		FROM PAY P
+
+
+	</select>
+	
+	<select id="reservationCnt" resultType="int" parameterType="mainVo">
+		SELECT COUNT(RESERVATION_NO)
+		FROM RESERVATION
+		WHERE DELYN='N'
+	</select>
+	
+	<select id="memberCnt" resultType="int" parameterType="mainVo">
+		SELECT COUNT(MEMBER_NO)
+		FROM MEMBER
+		WHERE DELYN='N'
+	</select>
+	
+	<select id="reviewCnt" resultType="int" parameterType="mainVo">
+		SELECT COUNT(REVIEW_NO)
+		FROM REVIEW
+		WHERE DELYN='N'
+	</select>
+	
+	<select id="localRestaurantCnt" resultType="mainVo" parameterType="mainVo">
+		SELECT L.LOCAL_NAME,
+        COUNT(R.RESTAURANT_NO) AS CNT
+		FROM RESTAURANT R
+		JOIN LOCAL L ON (R.LOCAL_NO = L.LOCAL_NO)
+		GROUP BY L.LOCAL_NAME		
+	</select>
+	
+	<select id="orderCnt" resultType="int" parameterType="mainVo">
+		SELECT COUNT(ORDERS_NO)
+			FROM ORDERS
+	</select>
+	
+	<select id="eachPrice" resultType="mainVo" parameterType="mainVo">
+			 
+			 SELECT TO_CHAR(CREATE_DATE, 'YYYYMMDD') AS CREATE_DATE,
+			        SUM(PAY_TOTAL_PRICE) AS PAY_TOTAL_PRICE
+			 FROM PAY 
+			 GROUP BY CREATE_DATE
+			 ORDER BY CREATE_DATE
+			 
+	</select>
+
+</mapper>

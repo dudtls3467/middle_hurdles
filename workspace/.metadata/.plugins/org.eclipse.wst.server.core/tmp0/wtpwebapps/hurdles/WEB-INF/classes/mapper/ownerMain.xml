@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="owner">
+	
+	
+	<select id="ownGetTotalPrice" resultType="int" parameterType="mainVo">
+		SELECT SUM(PRO.PRODUCT_PRICE*OP.ORDERS_PRODUCT_QTY)
+		FROM PAY P
+		LEFT JOIN ORDERS_PRODUCT OP ON(P.ORDERS_NO = OP.ORDERS_NO)
+		LEFT JOIN PRODUCT PRO ON (OP.PRODUCT_NO=PRO.PRODUCT_NO)
+		LEFT JOIN RESTAURANT RES ON (PRO.RESTAURANT_NO = RES.RESTAURANT_NO)
+		WHERE RES.MEMBER_NO = #{memberNo}	
+	</select>
+	
+	<select id="ownGetCountReservation" resultType="int" parameterType="mainVo">
+<!-- 		SELECT NVL(COUNT(R.RESERVATION_NO),0)
+		FROM RESERVATION R
+		LEFT JOIN PRODUCT PRO ON (R.RESERVE_PRODUCT_NO = PRO.PRODUCT_NO)
+		LEFT JOIN RESTAURANT RES ON (PRO.RESTAURANT_NO = RES.RESTAURANT_NO)
+		WHERE RES.MEMBER_NO = #{memberNo}	 -->
+		
+		SELECT NVL(COUNT(R.RESERVATION_NO),0)
+		FROM RESERVATION R
+		LEFT JOIN RESERVE_PRODUCT PRO ON (R.RESERVE_PRODUCT_NO = PRO.RESERVE_PRODUCT_NO)
+		LEFT JOIN RESTAURANT RES ON (PRO.RESTAURANT_NO = RES.RESTAURANT_NO)
+		WHERE RES.MEMBER_NO = #{memberNo}	
+	</select>
+	
+	<select id="ownGetCountOrder" resultType="int" parameterType="mainVo">
+	SELECT NVL(COUNT(O.ORDERS_NO),0)
+		FROM ORDERS O
+		JOIN ORDERS_PRODUCT OP ON (O.ORDERS_NO = OP.ORDERS_NO)
+		JOIN PRODUCT PRO ON (OP.PRODUCT_NO = PRO.PRODUCT_NO)
+		JOIN RESTAURANT RES ON (PRO.RESTAURANT_NO = RES.RESTAURANT_NO)
+		WHERE RES.MEMBER_NO = #{memberNo}
+	
+	</select>
+	
+	<select id="ownReviewCount" resultType="int" parameterType="mainVo" >
+		SELECT NVL(COUNT(R.REVIEW_NO),0) AS REVIEW_COUNT
+		FROM REVIEW R
+		JOIN RESTAURANT RES ON (R.RESTAURANT_NO = RES.RESTAURANT_NO)
+		WHERE RES.MEMBER_NO = #{memberNo}
+	</select>
+	
+	<select id="ownReviewScore" resultType="int" parameterType="mainVo">
+		SELECT NVL(AVG(R.REVIEW_SCORE),0) AS REVIEW_SCORE
+		FROM REVIEW R
+		JOIN RESTAURANT RES ON (R.RESTAURANT_NO = RES.RESTAURANT_NO)
+		WHERE RES.MEMBER_NO = #{memberNo}
+	
+	</select>
+	
+	<select id="ownRestaurant" resultType="int" parameterType="mainVo">
+		SELECT COUNT(RESTAURANT_NO)
+		FROM RESTAURANT
+		WHERE MEMBER_NO = #{memberNo}
+		AND DELYN='N'
+	</select>
+	
+	
+
+</mapper>
